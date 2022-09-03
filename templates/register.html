@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    
     <h1>register_page</h1>
     <form method="POST"> 
         {%csrf_token%}
@@ -18,14 +19,17 @@
         </div>           
     </form>
     <div id="messages">  
+        
         {%if messages%}
             {%for message in messages%}
                 <label class="error_mes">{{message}}</label></br>
             {%endfor%}
         {%endif%}
+
         {%for i in lista%}
             <label>{{i}}/</label>
         {%endfor%}
+
     </div>
     <p><a href="{%url 'login_page'%}">login</a></p>
     

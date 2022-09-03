@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from curses.ascii import isdigit
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def register_page(request):
@@ -51,3 +51,9 @@ def login_page(request):
             return redirect('login_page')
 
     return render(request,'login.html',{})
+
+
+@login_required(login_url='login_page')
+def logout_page(request):
+    logout(request)
+    return render(request,'logout.html',{})
