@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #my apps
+    'user_log_reg'
+
 ]
+
+AUTH_USER_MODEL='user_log_reg.Myuser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,7 +82,7 @@ WSGI_APPLICATION = 'FiveSecconds.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'fivesec.sqlite3',
     }
 }
 

@@ -12,14 +12,16 @@
     <form method="POST"> 
         {%csrf_token%}
         <div id="dane_rejestracja">
-            <label>Username: </label> <input type="text" name="username">
-            <label>Password: </label> <input type="password" name="password1">
-            <label>Conf Password: </label> <input type="password" name="password2">
-            <input type="submit" value="Register">
+            <label>Email: </label> <input type="email" name="email">
+            <label>Imię: </label> <input type="text" name="first_name">
+            <label>Hasło: </label> <input type="password" name="password1">
+            <label>Powtórz Hasło: </label> <input type="password" name="password2">
+
+            <input type="submit" value="Rejestracja">
         </div>           
     </form>
     <div id="messages">  
-        
+
         {%if messages%}
             {%for message in messages%}
                 <label class="error_mes">{{message}}</label></br>
