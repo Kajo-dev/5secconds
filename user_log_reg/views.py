@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
-from .models import Myuser
+from .models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -17,7 +17,7 @@ def register_page(request):
             error_list.append('Hasła nie są takie same')
             
         try:
-            newUser = Myuser.objects.create_user(email=email,first_name=first_name,password=password1)
+            newUser = User.objects.create_user(email=email,first_name=first_name,password=password1)
             newUser.save()
             return redirect('login_page')
         except:

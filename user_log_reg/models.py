@@ -18,7 +18,7 @@ class CastomUserMenago(BaseUserManager):
         user.save(using=self._db)
 
         return user
-
+ 
     def create_user(self,email,password,first_name,**extra_fields):
         extra_fields.setdefault('is_staff',True)
         extra_fields.setdefault('is_active',True)
@@ -35,7 +35,7 @@ class CastomUserMenago(BaseUserManager):
 
 
 
-class Myuser(AbstractBaseUser,PermissionsMixin):
+class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(db_index=True,unique=True,max_length=100)
     first_name = models.CharField(max_length=50)
 
