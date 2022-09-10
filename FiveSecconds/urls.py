@@ -10,6 +10,7 @@ urlpatterns = [
     path('',user_log_reg_views.register_page,name='register_page'),
     path('login/',user_log_reg_views.login_page,name='login_page'),
     path('logout/',user_log_reg_views.logout_page,name='logout_page'),
+    path('activate/<uidb64>/<token>', user_log_reg_views.activate, name='activate'),
 
     path('home/',home_views.home_page,name='home_page'),
 ]
