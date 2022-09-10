@@ -22,13 +22,7 @@
     </form>
     <div id="messages">  
 
-        {%if messages%}
-            {%for message in messages%}
-                <label class="error_mes">{{message}}</label></br>
-            {%endfor%}
-        {%endif%}
-
-        {%for i in lista%}
+        {%for i in error_list%}
             <label>{{i}}/</label>
         {%endfor%}
 

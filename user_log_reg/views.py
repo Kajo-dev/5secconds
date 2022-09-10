@@ -1,9 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
 from .models import User
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from .tokens import account_activation_token
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
 
 def register_page(request):
     error_list=[]
@@ -15,20 +20,23 @@ def register_page(request):
 
         if password1 != password2:
             error_list.append('Hasła nie są takie same')
-            
-        try:
-            newUser = User.objects.create_user(email=email,first_name=first_name,password=password1)
-            newUser.save()
-            return redirect('login_page')
-        except:
-            messages.error(request,'Error unsp')
         
+        newUser = User.objects.create_user(email=email,first_name=first_name,password=password1)
+        newUser.save()
+                
+        data_front = {
+            'first_name':first_name,
+            'email':email
+        }
 
-    errory = {
-        'lista':error_list
+        print(data_front)
+        return render(request,'confirmation_email.html',data_front)
+
+        
+    data_front = {
+        'error_list':error_list,
     }
-
-    return render(request,'register.html',errory)
+    return render(request,'register.html',data_front)
 
 
 def login_page(request):
