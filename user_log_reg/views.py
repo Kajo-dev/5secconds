@@ -54,7 +54,7 @@ def register_page(request):
             error_list.append('Hasła nie są takie same')
         if len(password1)<6:
             error_list.append('Hasło jest zbyt któtkie')
-        error_list={
+        data_front={
             'error_list':error_list
         }
 
@@ -68,7 +68,7 @@ def register_page(request):
             }
             return render(request,'confirmation_email.html',data_front)
         else:
-            return render(request,'register.html',error_list)
+            return render(request,'register.html',data_front)
     return render(request,'register.html',{})
       
 
