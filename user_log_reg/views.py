@@ -11,6 +11,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 
 def activate(request, uidb64, token):
+    error_list=[]
     User = get_user_model()
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -23,9 +24,9 @@ def activate(request, uidb64, token):
         user.save()
         return redirect('login_page')
     else:
-        pass #link nieprawidlowy
+        error_list.append('Link jest niepoprawny')
+        return render(request,'home.html',error_list)
 
-    return redirect('home_page')
 
 def activateEmail(request, user, to_email):
     mail_subject = "Activate your user account."
@@ -51,23 +52,25 @@ def register_page(request):
 
         if password1 != password2:
             error_list.append('Hasła nie są takie same')
-        
-        newUser = User.objects.create_user(email=email,first_name=first_name,password=password1)
-        newUser.save()
-        activateEmail(request,newUser,email)
-
-        data_front = {
-            'first_name':first_name,
-            'email':email
+        if len(password1)<6:
+            error_list.append('Hasło jest zbyt któtkie')
+        error_list={
+            'error_list':error_list
         }
 
-        return render(request,'confirmation_email.html',data_front)
-
-        
-    data_front = {
-        'error_list':error_list,
-    }
-    return render(request,'register.html',data_front)
+        if len(error_list)==0:
+            newUser = User.objects.create_user(email=email,first_name=first_name,password=password1)
+            newUser.save()
+            activateEmail(request,newUser,email)
+            data_front = {
+                'first_name':first_name,
+                'email':email
+            }
+            return render(request,'confirmation_email.html',data_front)
+        else:
+            return render(request,'register.html',error_list)
+    return render(request,'register.html',{})
+      
 
 def login_page(request):
     if request.method == 'POST':
