@@ -32,7 +32,8 @@ class Product(models.Model):
     in_stock = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)  
     date_created = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
-        return self.name
+        return self.title
 
