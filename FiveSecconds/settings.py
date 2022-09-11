@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #my apps
-    'user_log_reg'
+    'user_log_reg',
+    'product_store',
 
 ]
 
@@ -150,4 +151,3 @@ EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT = 14400 #4h tokenu 
 
-#test czy działa
