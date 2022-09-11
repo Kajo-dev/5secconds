@@ -1,4 +1,8 @@
 @import url("./_reset.scss");
 @import url("./_assets.scss");
 @import url("./_mobile.scss");
+<<<<<<< HEAD
 @import url("./_desktop.scss");/*# sourceMappingURL=main.css.map */
+=======
+@import url("./_desktop.scss");/*# sourceMappingURL=main.css.map */
+>>>>>>> ce7880e76ba99892811982c105ef19f5ef6e6924
