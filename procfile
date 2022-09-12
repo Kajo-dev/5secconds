@@ -1,2 +1,0 @@
-web: gunicorn fiveseconds-shop.wsgi
-heroku ps:scale web=1
