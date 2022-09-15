@@ -5,6 +5,17 @@
 <body>
 <h1>Sellsite</h1>
 
+    {% for product in products %}
+        {% if product.is_active == True and product.in_stock == True%}
+            <div class="box_for_product">
+                <img src="{{product.image.url}}"> <!--cały obrazek jako link do podstrony z produktem-->
+                <h3>Nazwa: {{product.title}}</h3>
+                <h3>Cena: {{product.price}} zł</h3>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+
 </body>
 </html>
 {% endblock content %}
