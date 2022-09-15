@@ -1,6 +1,0 @@
-pip3 install django
-pip3 install python-dotenv
-pip3 install Pillow
-
-if error == No such table: user_log_reg_user
-    python3 manage.py migrate --run-syncdb 
