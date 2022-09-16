@@ -1,6 +1,6 @@
 from django.db import models
+from django.urls import reverse
 
-# Create your models here.
 
 class Category(models.Model):
     name = models.CharField(
@@ -25,8 +25,8 @@ class Product(models.Model):
     title = models.CharField(max_length = 255)
     description = models.TextField(blank = True)
     image = models.ImageField(
-        upload_to='front/img/',
-        default='front/img/default_tshirt.png',
+        upload_to='product/',
+        default='front/img/default_img.png',
         )
     price = models.DecimalField(max_digits=6, decimal_places=2)
     in_stock = models.BooleanField(default=True)
@@ -42,6 +42,8 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('detail_page', args=[self.slug])
 
 class Sizes(models.Model):
     id_product = models.ForeignKey(
