@@ -9,8 +9,8 @@
         {% if product.is_active == True and product.in_stock == True%}
             <div class="box_for_product">
                 <img src="{{product.image.url}}"> <!--cały obrazek jako link do podstrony z produktem-->
-                <h3>Nazwa: {{product.title}}</h3>
-                <h3>Cena: {{product.price}} zł</h3>
+                <a href="{{ product.get_absolute_url }}"> {{product.title|slice:":50"}} </a>
+                <a>Cena: {{product.price}} zł</a>
             </div>
         {% endif %}
     {% endfor %}

@@ -1,6 +1,6 @@
 from django.db import models
+from django.urls import reverse
 
-# Create your models here.
 
 class Category(models.Model):
     name = models.CharField(
@@ -42,6 +42,8 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('detail_page', args=[self.slug])
 
 class Sizes(models.Model):
     id_product = models.ForeignKey(
