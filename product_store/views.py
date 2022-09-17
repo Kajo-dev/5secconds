@@ -11,3 +11,4 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     for_front = {'product':product}
     return render(request, 'detail_product.html', for_front)
+    
