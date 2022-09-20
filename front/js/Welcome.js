@@ -1,5 +1,15 @@
 export class Welcome {
-  constructor() {}
+  constructor(welcomeHeader) {
+    this.welcomeHeader = welcomeHeader;
+  }
 
-  tester = () => console.log("everything is fine!"); 
+  getTimeOfDay = () => {
+    const date = new Date();
+    const hours = date.getHours();
+    return {
+      hours,
+    };
+  };
+
+  tester = () => console.log("everything is fine!");
 }
