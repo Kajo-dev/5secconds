@@ -1,7 +1,7 @@
 {% autoescape off %}
-Hi {{ user.first_name }}, 
+Witaj {{ first_name }}, 
 
-Click on the link below to confirm your registration:
+Kliknij link poniżej, aby zakończyć proces rejestracji:
 
 {{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% endautoescape %}
