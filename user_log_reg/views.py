@@ -31,7 +31,7 @@ def activate(request, uidb64, token):
 def activateEmail(request, user, to_email):
     mail_subject = "Activate your user account."
     message = render_to_string("activate_account.html", {
-        'user': user.first_name,
+        'first_name': user.first_name,
         'domain': get_current_site(request).domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
