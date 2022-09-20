@@ -132,6 +132,8 @@ USE_TZ = True
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 STATIC_URL = '/front/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
