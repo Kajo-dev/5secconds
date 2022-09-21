@@ -33,13 +33,10 @@ class CastomUserMenago(BaseUserManager):
 
         return self._create_user(email,password,first_name,**extra_fields)
 
-
-
 class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(db_index=True,unique=True,max_length=100)
     first_name = models.CharField(max_length=50)
 
-    
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
