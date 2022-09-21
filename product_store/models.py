@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-
 class Category(models.Model):
     name = models.CharField(
         unique = True,
@@ -14,7 +13,6 @@ class Category(models.Model):
     
     def __str__(self):
         return self.name
-
  
 class Product(models.Model):
     category = models.ForeignKey(
