@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 import os
-if not os.environ.get("PRODUCTION"):
-    from dotenv import load_dotenv
-    load_dotenv('.env.local')
+from dotenv import load_dotenv
+
+load_dotenv('.env.local')
 
 
 
