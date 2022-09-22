@@ -134,7 +134,7 @@ STATIC_URL = '/front/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "front",
+    os.path.join(BASE_DIR, "front"),
 ]
 
 MEDIA_URL = '/img/'
