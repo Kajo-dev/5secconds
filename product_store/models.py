@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(
@@ -53,3 +54,7 @@ class Sizes(models.Model):
     M=models.IntegerField()
     L=models.IntegerField()
     XL=models.IntegerField()
+
+class Cart(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Product,blank=True)
