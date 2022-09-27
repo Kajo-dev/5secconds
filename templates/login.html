@@ -4,19 +4,19 @@
     <title>5secs - login</title>
 </head>
 <body>
-
-    <h1>login_page</h1>
-    <form method="POST"> {%csrf_token%}
-        <div id="dane_logowanie">
-            
-            <input type="text" name="username">
-            <input type="password" name="password">
-            <input type="submit" value="Sing in">
-            
-            <p><a href="{%url 'register_page'%}">Register</a></p>
+    <div class="login">
+        <div class="login__header">
+            <h2 class="login__header__welcome welcome__text">Dzień dobry!</h2>
+            <p class="login__header__paragraph">Zaloguj</p>
         </div>
-    </form>
-    
+        <form method="POST" class="login__form"> 
+            {%csrf_token%}
+                <input type="text" name="username" placeholder="e-mail">
+                <input type="password" name="password" placeholder="hasło">
+                <input class='login__form__btn' type="submit" value="Zaloguj">
+        </form>
+        <p class="having__account">Nie masz jeszcze konta? <a href="{%url 'register_page'%}">Zarejestruj</a></p>
+    </div>
 </body>
 </html>
 {% endblock content%}
