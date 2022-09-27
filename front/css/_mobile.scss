@@ -1,4 +1,5 @@
-.register {
+.register,
+.login {
   padding: 20px;
   width: 100vw;
   min-height: 100vh;
@@ -16,13 +17,18 @@
     width: 90vw;
     padding: 15px;
     margin-top: 10vh;
+    &__paragraph {
+      padding-top: 12px;
+    }
   }
   &__form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 5px;
+    margin: 0 auto;
     margin-top: 7vh;
+    max-width: 400px;
     input {
       width: 90%;
       min-width: 200px;
@@ -36,12 +42,17 @@
     }
   }
 }
-.register__form__btn {
+.register__form__btn,
+.login__form__btn {
   width: 50% !important;
   min-width: 100px !important;
   background-color: $primary-color !important;
-  border-bottom: none !important;
+  border: 1px solid $secondary-color !important;
   margin-top: 14vh !important;
+}
+
+.login__form__btn {
+  margin-top: 5vh !important;
 }
 
 .having__account {
@@ -53,4 +64,19 @@
     color: $primary-color;
     text-decoration: underline;
   }
+}
+
+.login {
+  .having__account {
+    color: $secondary-color;
+    a {
+      color: $secondary-color;
+    }
+  }
+}
+
+#messages {
+  color: rgb(227, 34, 34);
+  text-align: center;
+  margin: 5px 0;
 }

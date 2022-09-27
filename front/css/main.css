@@ -13,14 +13,16 @@ a {
   text-decoration: none;
 }
 
-.register {
+.register,
+.login {
   padding: 20px;
   width: 100vw;
   min-height: 100vh;
   background: #000;
   background: linear-gradient(0deg, #000 30%, #000 30%, #fff 30%);
 }
-.register__header {
+.register__header,
+.login__header {
   font-size: 1.5em;
   letter-spacing: 1px;
   font-weight: 300;
@@ -28,14 +30,22 @@ a {
   padding: 15px;
   margin-top: 10vh;
 }
-.register__form {
+.register__header__paragraph,
+.login__header__paragraph {
+  padding-top: 12px;
+}
+.register__form,
+.login__form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 5px;
+  margin: 0 auto;
   margin-top: 7vh;
+  max-width: 400px;
 }
-.register__form input {
+.register__form input,
+.login__form input {
   width: 90%;
   min-width: 200px;
   height: 5vh;
@@ -47,12 +57,17 @@ a {
   border-bottom: 1px solid #000;
 }
 
-.register__form__btn {
+.register__form__btn,
+.login__form__btn {
   width: 50% !important;
   min-width: 100px !important;
   background-color: #fff !important;
-  border-bottom: none !important;
+  border: 1px solid #000 !important;
   margin-top: 14vh !important;
+}
+
+.login__form__btn {
+  margin-top: 5vh !important;
 }
 
 .having__account {
@@ -64,4 +79,25 @@ a {
 .having__account a {
   color: #fff;
   text-decoration: underline;
+}
+
+.login .having__account {
+  color: #000;
+}
+.login .having__account a {
+  color: #000;
+}
+
+#messages {
+  color: rgb(227, 34, 34);
+  text-align: center;
+  margin: 5px 0;
+}
+
+@media screen and (min-width: 628px) {
+  .register__header,
+.login__header {
+    width: calc(100vw - 20px);
+    text-align: center;
+  }
 }/*# sourceMappingURL=main.css.map */
