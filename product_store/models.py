@@ -58,3 +58,14 @@ class Sizes(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(Product,blank=True)
+
+
+class OrderItem(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
+    is_ordered = models.BooleanField(default=False)
+    date_ordered = models.DateTimeField(null=True)
+    date_added = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.product.title
+
