@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+from user_log_reg.models import User
 
 class Category(models.Model):
     name = models.CharField(
@@ -57,15 +58,22 @@ class Sizes(models.Model):
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Product,blank=True)
+    items = models.ManyToManyField(Product, blank=True)
 
 
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(null=True)
-    date_added = models.DateTimeField(auto_now=True)
+    date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07
     
     def __str__(self):
         return self.product.title
 
+class Order(models.Model):
+    items = models.ManyToManyField(OrderItem)
+    date_ordered = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True )
+
+    def get_sum_cart(self):
+        return sum(item.product.price for item in self.items.all())
