@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 from user_log_reg.models import User
 
+
 class Category(models.Model):
     name = models.CharField(
         unique = True,
@@ -77,3 +78,5 @@ class Order(models.Model):
 
     def get_sum_cart(self):
         return sum(item.product.price for item in self.items.all())
+
+
