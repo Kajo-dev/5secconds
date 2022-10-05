@@ -1,3 +1,5 @@
+from email.policy import default
+from turtle import title
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
@@ -52,10 +54,19 @@ class Sizes(models.Model):
         related_name='rozmiar',
         on_delete=models.CASCADE
     )
-    S=models.IntegerField()
-    M=models.IntegerField()
-    L=models.IntegerField()
-    XL=models.IntegerField()
+    
+    S=models.IntegerField(
+        default = 0,
+    )
+    M=models.IntegerField(
+        default = 0,
+    )
+    L=models.IntegerField(
+        default = 0,
+    )
+    XL=models.IntegerField(
+        default = 0,
+    )
 
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
