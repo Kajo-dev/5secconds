@@ -1,5 +1,8 @@
 import { Welcome } from "./Welcome.js";
 
+const location = window.location;
+console.log(location);
+
 const welcomeHeader = document.querySelector(".welcome__text");
 const welcome = new Welcome(welcomeHeader);
 
