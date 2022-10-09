@@ -3,20 +3,23 @@
 <title>5ecs - SellSite</title>
 </head>
 <body>
-<h1>Sellsite</h1>
 
-    {% for product in products %}
-        {% if product.is_active == True and product.in_stock == True%}
+    <div class="sellsite container">
+        <h1>Sellsite</h1>
+        <div class="sellsite__products">
+            {% for product in products %}
+                {% if product.is_active == True and product.in_stock == True%}
 
-            <div class="box_for_product">
-                <img src="{{product.image.url}}"> 
-                <a href="{{ product.get_absolute_url }}"> {{product.title|slice:":50"}} </a>
-                <a>Cena: {{product.price}} zł</a>
-            </div>
+                    <div class="box_for_product">
+                        <img src="{{product.image.url}}"> 
+                        <a href="{{ product.get_absolute_url }}"> {{product.title|slice:":50"}} </a>
+                        <a>Cena: {{product.price}} zł</a>
+                    </div>
 
-        {% endif %}
-    {% endfor %}
-
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 
 </body>
 </html>
