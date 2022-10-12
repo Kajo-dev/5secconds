@@ -1,7 +1,7 @@
 from django.shortcuts import render , get_object_or_404
 from .models import *
 from django.contrib.auth.decorators import login_required
-
+from user_log_reg.models import Profile
 
 def product_sell(request):
     products = Product.objects.all() 

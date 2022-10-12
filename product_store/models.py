@@ -1,11 +1,7 @@
-from email.policy import default
-from turtle import title
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from user_log_reg.models import Profile
-
-
 
 class Category(models.Model):
     name = models.CharField(
@@ -68,10 +64,6 @@ class Sizes(models.Model):
     XL=models.IntegerField(
         default = 0,
     )
-
-class Cart(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Product, blank=True)
 
 
 class OrderItem(models.Model):
