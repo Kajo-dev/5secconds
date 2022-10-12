@@ -13,13 +13,17 @@ a {
   text-decoration: none;
 }
 
-.register,
-.login {
-  padding: 20px;
+.container {
+  overflow-x: hidden;
   width: 100vw;
   min-height: 100vh;
   background: #000;
   background: linear-gradient(0deg, #000 30%, #000 30%, #fff 30%);
+}
+
+.register,
+.login {
+  padding: 20px;
 }
 .register__header,
 .login__header {
@@ -92,6 +96,17 @@ a {
   color: rgb(227, 34, 34);
   text-align: center;
   margin: 5px 0;
+}
+
+.sellsite__products {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 20px;
+}
+.sellsite__products img {
+  width: 100%;
 }
 
 @media screen and (min-width: 628px) {
