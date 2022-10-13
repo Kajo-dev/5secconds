@@ -105,7 +105,16 @@ a {
        column-gap: 20px;
   row-gap: 20px;
 }
-.sellsite__products img {
+.sellsite__products .box_for_product {
+  padding: 12px;
+  text-align: left;
+}
+.sellsite__products .box_for_product .product_title {
+  width: 100%;
+  margin: 5px 0;
+  display: inline-block;
+}
+.sellsite__products .box_for_product img {
   width: 100%;
 }
 
