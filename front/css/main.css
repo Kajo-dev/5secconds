@@ -104,7 +104,7 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 20px;
 }
 .sellsite__products .box_for_product {
@@ -113,7 +113,7 @@ a {
   background-color: rgba(244, 244, 244, 0.896);
   border-radius: 16px;
   -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   height: 30vh;
 }
 .sellsite__products .box_for_product .product_title {
@@ -135,8 +135,8 @@ a {
 
 @media screen and (min-width: 628px) {
   .register__header,
-.login__header {
+  .login__header {
     width: calc(100vw - 20px);
     text-align: center;
   }
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */
