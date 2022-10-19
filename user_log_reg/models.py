@@ -1,6 +1,6 @@
 from django.db import models
 from FiveSecconds import settings
-from product_store.models import Product
+
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 
 class CastomUserMenago(BaseUserManager):
@@ -54,4 +54,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    item = models.ManyToManyField(Product, blank=True)
+    item = models.ManyToManyField("product_store.Product", blank=True)
+
+    def __str__(self):
+        return str(self.user)

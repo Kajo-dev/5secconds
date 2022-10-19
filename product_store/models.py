@@ -1,7 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+
 from user_log_reg.models import Profile
+
 
 class Category(models.Model):
     name = models.CharField(
