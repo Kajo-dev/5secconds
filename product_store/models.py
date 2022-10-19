@@ -3,7 +3,8 @@ from turtle import title
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-from user_log_reg.models import User
+
+from user_log_reg.models import Profile
 
 
 class Category(models.Model):
@@ -68,10 +69,6 @@ class Sizes(models.Model):
         default = 0,
     )
 
-class Cart(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Product, blank=True)
-
 
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
@@ -85,9 +82,12 @@ class OrderItem(models.Model):
 class Order(models.Model):
     items = models.ManyToManyField(OrderItem)
     date_ordered = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True )
+    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True )
 
     def get_sum_cart(self):
         return sum(item.product.price for item in self.items.all())
+
+    def get_cart_items(self):
+        return self.items.all()
 
 
