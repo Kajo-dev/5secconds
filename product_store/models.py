@@ -1,5 +1,5 @@
-from email.policy import default
-from turtle import title
+
+from decimal import Decimal
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
@@ -37,7 +37,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)  
     date_created = models.DateTimeField(auto_now_add=True)
     on_sale = models.BooleanField(default=False)
-    before_sale = models.DecimalField(max_digits=6, decimal_places=2,default=0)
+    before_sale = models.DecimalField(max_digits=6, decimal_places=2, default=Decimal(0.00))
     slug = models.SlugField(
         verbose_name = ("safe URL"),
         max_length = 255,
@@ -70,15 +70,16 @@ class Sizes(models.Model):
     )
 
 
+#jeden element zamówienia
+
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(null=True)
     date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07
-    
-    def __str__(self):
-        return self.product.title
 
+
+#całe zamowienie
 class Order(models.Model):
     items = models.ManyToManyField(OrderItem)
     date_ordered = models.DateTimeField(auto_now=True)
