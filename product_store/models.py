@@ -1,6 +1,5 @@
-from email.policy import default
+
 from decimal import Decimal
-from turtle import title
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
@@ -75,7 +74,8 @@ class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(null=True)
-    date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07xw
+    date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07
+
 
 #całe zamowienie
 class Order(models.Model):

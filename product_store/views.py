@@ -1,7 +1,8 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404, redirect
 from .models import *
 from django.contrib.auth.decorators import login_required
 from user_log_reg.models import Profile
+from product_store.models import Order, OrderItem
 
 def product_sell(request):
     products = Product.objects.all() 
@@ -17,7 +18,11 @@ def product_detail(request, slug):
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
     product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
-    
 
-    return render(request,'cart.html',{})
+    order_item = OrderItem.objects.get_or_create(product=product)
+    user_order = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
+
+    user_order.items.add(order_item)  # type: ignore
+
+    return redirect('sellsite_page')
 
