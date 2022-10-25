@@ -17,4 +17,7 @@ def product_detail(request, slug):
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
     product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
+    
+
+    return render(request,'cart.html',{})
 
