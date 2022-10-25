@@ -69,7 +69,9 @@ class Sizes(models.Model):
         default = 0,
     )
 
+
 #jeden element zamówienia
+
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)

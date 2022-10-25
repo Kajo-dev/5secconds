@@ -54,7 +54,9 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     items = models.ManyToManyField("product_store.Product", blank=True)
+
 
     def __str__(self):
         return str(self.user)

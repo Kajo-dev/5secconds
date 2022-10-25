@@ -19,7 +19,9 @@ urlpatterns = [
 
     path('sellsite/',product_store_views.product_sell,name='sellsite_page'),
     path('<slug:slug>', product_store_views.product_detail, name='detail_page'),
+
     re_path(r'^add-to-cart/(?P<item_id>[-\w]+)/$', product_store_views.add_to_cart, name="add_to_cart"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
