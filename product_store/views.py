@@ -25,7 +25,6 @@ def add_to_cart(request,**kwargs):
     order_item = OrderItem.objects.get_or_create(product=product)
     user_order = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
 
-
     return redirect('sellsite_page')
 
 
