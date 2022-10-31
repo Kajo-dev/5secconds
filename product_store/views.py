@@ -27,7 +27,7 @@ def my_orders(request):
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
     product = Product.objects.filter(id=kwargs.get('product_id', "")).first()
-
+    
     order_item, status = OrderItem.objects.get_or_create(product=product)
     user_order, status = Order.objects.get_or_create(owner=user_profile)
     user_order.items.add(order_item)
