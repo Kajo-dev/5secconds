@@ -9,14 +9,14 @@ from product_store.models import Order, OrderItem
 def product_sell(request):
     products = Product.objects.all() 
     for_front = {'products':products}
-    return render(request,'sellsite.html',for_front )
+    return render(request,'sellsite.html',for_front)
 
 def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug, is_active=True)
+    product = get_object_or_404(Product, slug=slug)
     for_front = {'product':product}
     return render(request, 'detail_product.html', for_front)
     
-def my_order(request):
+def my_orders(request):
     user_profile = Profile.objects.filter(user=request.user).first()
     orders = Order.objects.filter(owner=user_profile)
     for_front={
@@ -25,9 +25,8 @@ def my_order(request):
     return render(request,'my_orders.html', for_front)
 
 def add_to_cart(request,**kwargs):
-
     user_profile = get_object_or_404(Profile,user=request.user)
-    product = Product.objects.filter(id=kwargs.get('product.id', "1")).first()
+    product = Product.objects.filter(id=kwargs.get('product_id', "")).first()
 
     order_item, status = OrderItem.objects.get_or_create(product=product)
     user_order, status = Order.objects.get_or_create(owner=user_profile)

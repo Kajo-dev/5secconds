@@ -4,8 +4,10 @@
     <title>Zamówienia</title>
 </head>
 <body>
-    <h1>Zam</h1>
-    <p>{{for_front.user_orders}}</p>
+    <h1>Zamówienia</h1>
+    {% for order in user_orders %}
+        <p>{{order.id}}</p>
+    {% endfor %}
 </body>
 </html>
 {% endblock content%}
