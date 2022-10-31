@@ -71,12 +71,10 @@ class Sizes(models.Model):
 
 
 #jeden element zamówienia
-
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
-    date_ordered = models.DateTimeField(null=True)
-    date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07
+    date_ordered = models.DateTimeField(auto_now=True)
 
 
 #całe zamowienie

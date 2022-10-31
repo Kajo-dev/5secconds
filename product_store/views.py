@@ -16,14 +16,24 @@ def product_detail(request, slug):
     for_front = {'product':product}
     return render(request, 'detail_product.html', for_front)
     
+def my_order(request):
+    user_profile = Profile.objects.filter(user=request.user).first()
+    orders = Order.objects.filter(owner=user_profile)
+    for_front={
+        'user_orders' : orders
+    }
+    return render(request,'my_orders.html', for_front)
 
 def add_to_cart(request,**kwargs):
+
     user_profile = get_object_or_404(Profile,user=request.user)
-    product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
+    product = Product.objects.filter(id=kwargs.get('product.id', "1")).first()
 
-
-    order_item = OrderItem.objects.get_or_create(product=product)
-    user_order = Order.objects.get_or_create(owner=user_profile, is_ordered=False)
+    order_item, status = OrderItem.objects.get_or_create(product=product)
+    user_order, status = Order.objects.get_or_create(owner=user_profile)
+    user_order.items.add(order_item)
+    if status:
+        user_order.save()
 
     return redirect('sellsite_page')
 
