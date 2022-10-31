@@ -6,7 +6,10 @@
 <body>
     <h1>Zamówienia</h1>
     {% for order in user_orders %}
-        <p>{{order.id}}</p>
+        <h2>{{order.id}}</h2>
+        {% for items in order.get_cart_items %}
+            <p>{{items}}</p>
+        {% endfor %}
     {% endfor %}
 </body>
 </html>

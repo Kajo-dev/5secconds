@@ -76,6 +76,8 @@ class OrderItem(models.Model):
     is_ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.product.title
 
 #całe zamowienie
 class Order(models.Model):
@@ -89,4 +91,6 @@ class Order(models.Model):
     def get_cart_items(self):
         return self.items.all()
 
+    def __str__(self):
+        return '{0}'.format(self.owner)
 
