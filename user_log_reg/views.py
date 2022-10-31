@@ -29,7 +29,7 @@ def activate(request, uidb64, token):
 
 
 def activateEmail(request, user, to_email):
-    mail_subject = "Activate your user account."
+    mail_subject = "Aktywacja Konta."
     message = render_to_string("activate_account.html", {
         'first_name': user.first_name,
         'domain': get_current_site(request).domain,

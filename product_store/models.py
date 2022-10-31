@@ -71,13 +71,13 @@ class Sizes(models.Model):
 
 
 #jeden element zamówienia
-
 class OrderItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
-    date_ordered = models.DateTimeField(null=True)
-    date_added = models.DateTimeField(auto_now=True) #do usuwania nieopłaconych zamówień B-07
+    date_ordered = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.product.title
 
 #całe zamowienie
 class Order(models.Model):
@@ -91,4 +91,6 @@ class Order(models.Model):
     def get_cart_items(self):
         return self.items.all()
 
+    def __str__(self):
+        return '{0}'.format(self.owner)
 
