@@ -68,6 +68,9 @@ class Sizes(models.Model):
     XL=models.IntegerField(
         default = 0,
     )
+    
+    def __str__(self):
+        return self.id_product.title
 
 
 #jeden element zamówienia

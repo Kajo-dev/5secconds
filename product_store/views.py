@@ -14,7 +14,11 @@ def product_sell(request):
 @login_required(login_url='login_page')
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    for_front = {'product':product}
+    sizes = get_object_or_404(Sizes)
+    for_front = {
+        'product':product,
+        'sizes':sizes
+    }
     return render(request, 'detail_product.html', for_front)
 
 @login_required(login_url='login_page') 
@@ -30,6 +34,7 @@ def my_orders(request):
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
     product = Product.objects.filter(id=kwargs.get('product_id', "")).first()
+    
     
     order_item, status = OrderItem.objects.get_or_create(product=product)
     user_order, status = Order.objects.get_or_create(owner=user_profile)

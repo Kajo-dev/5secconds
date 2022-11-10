@@ -4,10 +4,19 @@
     <title>5secs - detail_page</title>
 </head>
 <body>
-    <h1>product_detail_site</h1>
+    <img src="{{ product.image.url }}"> 
 
-    <h3>{{product.title}}</h3>
-    <h3>{{product.price}} zł</h3>
+
+    <h1>{{product.title}}</h1>
+
+    <br>
+    <h2>Rozmiary:</h2>
+    <h3>S: {{sizes.S}}</h3>
+    <h3>M: {{sizes.M}}</h3>
+    <h3>L: {{sizes.L}}</h3>
+    <h3>XL: {{sizes.XL}}</h3>
+
+    <h3>Cena: {{product.price}} zł</h3>
     <a href="/add_to_cart/{{product.id}}/">Dodaj Do Koszyka</a>
     
 </body>
