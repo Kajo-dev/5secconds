@@ -50,10 +50,12 @@ def register_page(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
+        if not email:
+            error_list.append('Adres e-mail jest wymagany ')
         if password1 != password2:
-            error_list.append('Hasła nie są takie same')
+            error_list.append('Hasła nie są takie same ')
         if len(password1)<6:
-            error_list.append('Hasło jest zbyt któtkie')
+            error_list.append('Hasło jest zbyt krótkie ')
         data_front={
             'error_list':error_list
         }
