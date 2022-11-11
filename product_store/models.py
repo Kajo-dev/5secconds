@@ -29,8 +29,8 @@ class Product(models.Model):
     title = models.CharField(max_length = 255)
     description = models.TextField(blank = True)
     image = models.ImageField(
-        upload_to='product/',
-        default='front/img/default_img.png',
+        upload_to = 'product/',
+        default = 'front/img/default_img.png',
         )
     price = models.DecimalField(max_digits=6, decimal_places=2)
     in_stock = models.BooleanField(default=True)
@@ -41,6 +41,7 @@ class Product(models.Model):
     slug = models.SlugField(
         verbose_name = ("safe URL"),
         max_length = 255,
+        default = 'URL_' 
     )
 
     def __str__(self):
@@ -55,19 +56,13 @@ class Sizes(models.Model):
         related_name='rozmiar',
         on_delete=models.CASCADE
     )
+
+    name_size = models.CharField(max_length=3)
+
+    quantity_size = models.IntegerField(default=0)
     
-    S=models.IntegerField(
-        default = 0,
-    )
-    M=models.IntegerField(
-        default = 0,
-    )
-    L=models.IntegerField(
-        default = 0,
-    )
-    XL=models.IntegerField(
-        default = 0,
-    )
+    def __str__(self):
+        return self.id_product.title +" "+ self.name_size
 
 
 #jeden element zamówienia

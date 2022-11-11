@@ -5,17 +5,23 @@ from django.contrib.auth.decorators import login_required
 from user_log_reg.models import Profile
 from product_store.models import Order, OrderItem
 
-
+@login_required(login_url='login_page')
 def product_sell(request):
     products = Product.objects.all() 
     for_front = {'products':products}
     return render(request,'sellsite.html',for_front)
 
+@login_required(login_url='login_page')
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    for_front = {'product':product}
+    sizes = Sizes.objects.filter(id_product=product)
+    for_front = {
+        'product':product,
+        'sizes':sizes
+    }
     return render(request, 'detail_product.html', for_front)
-    
+
+@login_required(login_url='login_page') 
 def my_orders(request):
     user_profile = Profile.objects.filter(user=request.user).first()
     orders = Order.objects.filter(owner=user_profile)
@@ -24,9 +30,11 @@ def my_orders(request):
     }
     return render(request,'my_orders.html', for_front)
 
+@login_required(login_url='login_page')
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
     product = Product.objects.filter(id=kwargs.get('product_id', "")).first()
+    
     
     order_item, status = OrderItem.objects.get_or_create(product=product)
     user_order, status = Order.objects.get_or_create(owner=user_profile)

@@ -50,10 +50,12 @@ def register_page(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
+        if not email:
+            error_list.append('Adres e-mail jest wymagany ')
         if password1 != password2:
-            error_list.append('Hasła nie są takie same')
+            error_list.append('Hasła nie są takie same ')
         if len(password1)<6:
-            error_list.append('Hasło jest zbyt któtkie')
+            error_list.append('Hasło jest zbyt krótkie ')
         data_front={
             'error_list':error_list
         }
@@ -73,6 +75,7 @@ def register_page(request):
       
 
 def login_page(request):
+    error_list=[]
     if request.method == 'POST':
         username=request.POST['username']
         password=request.POST['password']
@@ -83,8 +86,14 @@ def login_page(request):
             login(request,user)
             return redirect('home_page')
         else:
-            return redirect('login_page')
+            error_list.append('Dane do logowania są nieprawidłowe')
+            data_front={
+                'error_list':error_list
+            }
+            return render(request,'login.html',data_front)
 
+       
+  
     return render(request,'login.html',{})
 
 

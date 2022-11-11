@@ -6,10 +6,6 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUse
 
 class CastomUserMenago(BaseUserManager):
     def _create_user(self,email,password,first_name,**extra_fields):
-        if not email:
-            raise ValueError("Email_brak")
-        if not password:
-            raise ValueError("Hasło_brak")
 
         user = self.model(
             email = self.normalize_email(email),

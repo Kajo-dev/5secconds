@@ -4,10 +4,18 @@
     <title>5secs - detail_page</title>
 </head>
 <body>
-    <h1>product_detail_site</h1>
+    <h1>{{product.title}}</h1>
+    <img src="{{product.image.url}}"> 
 
-    <h3>{{product.title}}</h3>
-    <h3>{{product.price}} zł</h3>
+    <br>
+    <h2>Dostępne Rozmiary:</h2>
+    {%for size in sizes%}
+        {%if size.quantity_size > 0%}
+            {{size.name_size}}
+        {%endif%}
+    {%endfor%}
+  
+    <h3>Cena: {{product.price}} zł</h3>
     <a href="/add_to_cart/{{product.id}}/">Dodaj Do Koszyka</a>
     
 </body>
