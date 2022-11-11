@@ -14,7 +14,7 @@ def product_sell(request):
 @login_required(login_url='login_page')
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    sizes = get_object_or_404(Sizes)
+    sizes = Sizes.objects.filter(id_product=product)
     for_front = {
         'product':product,
         'sizes':sizes
