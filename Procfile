@@ -1,1 +1,1 @@
-web: gunicorn '5seconds.wsgi'
+web: gunicorn 'FiveSecconds.wsgi'
