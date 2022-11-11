@@ -15,6 +15,12 @@
     <script src="{% static 'js/main.js' %}" type="module"></script>
     {% block title %} {% endblock title %}
   </head>
+    <nav>
+      <p><a href="{%url 'logout_page'%}">Wylogowanie</a></p>
+      <p><a href="{%url 'sellsite_page'%}">Sellsite</a></p>
+      <p><a href="{%url 'orders_page'%}">Moje zamówiena</a></p>
+      <p><a href="{%url 'home_page'%}">Home</a></p>
+    </nav>
     {% block content %} {% endblock content %}
 
     <footer>

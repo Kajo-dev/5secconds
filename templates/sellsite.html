@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
-{% block content%}
-<title>5ecs - SellSite</title>
+{% extends 'base_with_navbar.html' %}
+
+{%block title%} <title>5ecs - SellSite</title> {%endblock title%}
 </head>
+{% block content%}
 <body>
     <p><a href="{%url 'home_page'%}">Home</a></p>
     <div class="sellsite container">
