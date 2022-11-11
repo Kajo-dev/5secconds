@@ -15,6 +15,13 @@
                 <input type="password" name="password" placeholder="hasło">
                 <input class='login__form__btn' type="submit" value="Zaloguj">
         </form>
+        <div id="messages">  
+                     
+            {%for i in error_list%}
+                <label>{{i}}</label>
+            {%endfor%}
+
+        </div>
         <p class="having__account">Nie masz jeszcze konta? <a href="{%url 'register_page'%}">Zarejestruj</a></p>
     </div>
 </body>

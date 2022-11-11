@@ -75,6 +75,7 @@ def register_page(request):
       
 
 def login_page(request):
+    error_list=[]
     if request.method == 'POST':
         username=request.POST['username']
         password=request.POST['password']
@@ -85,8 +86,14 @@ def login_page(request):
             login(request,user)
             return redirect('home_page')
         else:
-            return redirect('login_page')
+            error_list.append('Dane do logowania są nieprawidłowe')
+            data_front={
+                'error_list':error_list
+            }
+            return render(request,'login.html',data_front)
 
+       
+  
     return render(request,'login.html',{})
 
 
