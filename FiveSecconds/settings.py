@@ -17,9 +17,6 @@ from dotenv import load_dotenv
 
 load_dotenv('.env.local')
 
-
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,8 +30,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '5seconds-production.up.railway.app']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','5seconds-production.up.railway.app']
 
+CSRF_TRUSTED_ORIGINS = ['https://5seconds-production.up.railway.app']
 
 # Application definition
 
@@ -45,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
+    'whitenoise.runserver_nostatic',    
 
     #my apps
     'user_log_reg',
@@ -62,9 +63,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     
 ]
-
+ 
 ROOT_URLCONF = 'FiveSecconds.urls'
 
 TEMPLATES = [
@@ -138,6 +140,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "front"),
 ]
+
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/img/'
 
