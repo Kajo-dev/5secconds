@@ -43,10 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
-    'cloudinary',
-    'whitenoise.runserver_nostatic',    
-
+  
     #my apps
     'user_log_reg',
     'product_store',
