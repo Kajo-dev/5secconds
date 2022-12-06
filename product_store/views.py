@@ -30,6 +30,16 @@ def my_orders(request):
     }
     return render(request,'my_orders.html', for_front)
 
+
+@login_required(login_url='login_page') 
+def my_cart(request):
+    user_profile = Profile.objects.filter(user=request.user).first()
+    orders = Order.objects.filter(owner=user_profile).first()
+    for_front={
+        'user_orders' : orders
+    }
+    return render(request,'cart.html', for_front)
+
 @login_required(login_url='login_page')
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)

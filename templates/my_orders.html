@@ -5,15 +5,15 @@
 </head>
 {% block content %}
 <body>
-    <h1>Zamówienia</h1>
+    <h1>Twoje zamówienia</h1>
     <br>
     {% for order in user_orders %}
-        <h3>Numer zamówienia: {{order.id}}</h3>
+    <p>numer zanówienia {{order.id}}</p>
         {% for items in order.get_cart_items %}
             <p>{{items}}: {{items.product.price}} zł</p>
         {% endfor %}
         <br>
-        <p>Wartość koszyka: {{order.get_sum_cart}} zł</p>
+        <p>Wartość zamówienia: {{order.get_sum_cart}} zł</p>
     {% endfor %}
 </body>
 </html>
