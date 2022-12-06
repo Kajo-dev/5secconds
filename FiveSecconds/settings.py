@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #my apps
     'user_log_reg',
     'product_store',
+    'payments',
 
 ]
 
