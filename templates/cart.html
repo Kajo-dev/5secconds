@@ -7,12 +7,13 @@
 <body>
     <h1>Koszyk</h1>
     <br>
-    {% for order in user_orders %}
+    {% for order in user_order %}
         {% for items in order.get_cart_items %}
             <p>{{items}}: {{items.product.price}} zł</p>
         {% endfor %}
         <br>
         <p>Wartość koszyka: {{order.get_sum_cart}} zł</p>
+        <script> var total = '{{order.get_sum_cart}}'</script>
     {% endfor %}
 
     <div id="paypal-button-container"></div>
@@ -20,13 +21,14 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AfZF0w8UQdYWmbj4mUixcwfxyr0YOWQDFZt21RpD7Gk93qnTyLKxA86kzIXioNRcCSqRWCP9V5r9gXs0&currency=PLN"></script>
 
     <script>
+
         paypal.Buttons({
             // Set up the transaction
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '88.44'
+                            value: total
                         }
                     }]
                 });

@@ -34,9 +34,9 @@ def my_orders(request):
 @login_required(login_url='login_page') 
 def my_cart(request):
     user_profile = Profile.objects.filter(user=request.user).first()
-    orders = Order.objects.filter(owner=user_profile).first()
+    order = Order.objects.filter(owner=user_profile)
     for_front={
-        'user_orders' : orders
+        'user_order' : order
     }
     return render(request,'cart.html', for_front)
 
