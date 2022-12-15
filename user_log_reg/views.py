@@ -25,7 +25,10 @@ def activate(request, uidb64, token):
         return redirect('login_page')
     else:
         error_list.append('Link jest niepoprawny')
-        return render(request,'home.html',error_list)
+        data_front={
+            'error_list':error_list
+        }
+        return render(request,'home.html',data_front)
 
 
 def activateEmail(request, user, to_email):
