@@ -1,0 +1,49 @@
+{% extends "base_with_navbar.html" %}
+ 
+
+{%block title%} <title>Koszyk</title> {%endblock title%}
+</head>
+{% block content %}
+<body>
+    <h1>Koszyk</h1>
+    <br>
+    {% for order in user_order %}
+        {% for items in order.get_cart_items %}
+            <p>{{items}}: {{items.product.price}}zł  <a href="/delete_from_cart/{{items.id}}/">Usuń</a></p> 
+        {% endfor %}
+        <br>
+        <p>Wartość koszyka: {{order.get_sum_cart}} zł</p>
+        <script> var total = '{{order.get_sum_cart}}'</script>
+    {% endfor %}
+
+    <div id="paypal-button-container"></div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AfZF0w8UQdYWmbj4mUixcwfxyr0YOWQDFZt21RpD7Gk93qnTyLKxA86kzIXioNRcCSqRWCP9V5r9gXs0&currency=PLN"></script>
+
+    <script>
+        paypal.Buttons({
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
+{% endblock content%}

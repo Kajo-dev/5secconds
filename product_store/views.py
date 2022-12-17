@@ -30,12 +30,20 @@ def my_orders(request):
     }
     return render(request,'my_orders.html', for_front)
 
+
+@login_required(login_url='login_page') 
+def my_cart(request):
+    user_profile = Profile.objects.filter(user=request.user).first()
+    order = Order.objects.filter(owner=user_profile)
+    for_front={
+        'user_order' : order
+    }
+    return render(request,'cart.html', for_front)
+
 @login_required(login_url='login_page')
 def add_to_cart(request,**kwargs):
     user_profile = get_object_or_404(Profile,user=request.user)
-    product = Product.objects.filter(id=kwargs.get('product_id', "")).first()
-    
-    
+    product = Product.objects.filter(id=kwargs.get('product_id', "")).first()   
     order_item, status = OrderItem.objects.get_or_create(product=product)
     user_order, status = Order.objects.get_or_create(owner=user_profile)
     user_order.items.add(order_item)
@@ -45,3 +53,9 @@ def add_to_cart(request,**kwargs):
     return redirect('sellsite_page')
 
 
+@login_required()
+def delete_from_cart(request, **kwargs):
+    item_to_delete = OrderItem.objects.filter(pk=kwargs.get('items_id', "")).first()
+    if not item_to_delete == None:
+        item_to_delete.delete()
+    return redirect('cart_page')
