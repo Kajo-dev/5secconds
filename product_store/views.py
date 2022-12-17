@@ -4,7 +4,6 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from user_log_reg.models import Profile
 from product_store.models import Order, OrderItem
-from django.urls import reverse
 
 @login_required(login_url='login_page')
 def product_sell(request):
@@ -56,7 +55,7 @@ def add_to_cart(request,**kwargs):
 
 @login_required()
 def delete_from_cart(request, **kwargs):
-    item_to_delete = OrderItem.objects.filter(pk=kwargs.get('items_id', ""))
-    if item_to_delete.exists():
-        item_to_delete[0].delete()
-    return redirect(reverse('cart_page'))
+    item_to_delete = OrderItem.objects.filter(pk=kwargs.get('items_id', "")).first()
+    if not item_to_delete == None:
+        item_to_delete.delete()
+    return redirect('cart_page')

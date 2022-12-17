@@ -155,10 +155,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'front/img')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #email sett
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'FiveSeconds@gmail.com'
-EMAIL_HOST_USER = 'contactfiveseconds@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'serwer2258368.home.pl'
+EMAIL_FROM = 'FiveSeconds-shop'
+EMAIL_HOST_USER = 'aktywacja@fiveseconds.pl'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 EMAIL_PORT = 587

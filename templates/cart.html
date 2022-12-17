@@ -9,8 +9,7 @@
     <br>
     {% for order in user_order %}
         {% for items in order.get_cart_items %}
-            <p>{{items}}: {{items.product.price}}zł</p>
-            <a href="/delete_from_cart/{{items.id}}/">Usuń</a>
+            <p>{{items}}: {{items.product.price}}zł  <a href="/delete_from_cart/{{items.id}}/">Usuń</a></p> 
         {% endfor %}
         <br>
         <p>Wartość koszyka: {{order.get_sum_cart}} zł</p>
