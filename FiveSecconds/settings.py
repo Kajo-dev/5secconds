@@ -91,12 +91,15 @@ WSGI_APPLICATION = 'FiveSecconds.wsgi.application'
 
 DATABASES = {
 'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('NAME'), 
-        'USER': '36725704_fsec_testowa',
-        'PASSWORD': os.getenv('PASSWORD'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('database_NAME'), 
+        'USER': os.getenv('database_USER'),
+        'PASSWORD': os.getenv('database_PASSWORD'),
         'HOST': os.getenv('HOST'), 
-        'PORT': '5432',
+        'PORT': '3306',
+        'OPTIONS': {  
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+        }  
     }
 }
 
@@ -155,10 +158,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'front/img')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #email sett
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'serwer2258368.home.pl'
-EMAIL_FROM = 'FiveSeconds-shop'
-EMAIL_HOST_USER = 'aktywacja@fiveseconds.pl'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('HOST')
+EMAIL_FROM = 'Rejestracja@fiveseconds.pl'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 EMAIL_PORT = 587
