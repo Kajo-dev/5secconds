@@ -66,7 +66,7 @@ class Sizes(models.Model):
 
 
 #jeden element zamówienia
-class OrderItem(models.Model):
+class CartItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(auto_now=True)
@@ -75,8 +75,8 @@ class OrderItem(models.Model):
         return self.product.title
 
 #całe zamowienie
-class Order(models.Model):
-    items = models.ManyToManyField(OrderItem)
+class Cart(models.Model):
+    items = models.ManyToManyField(CartItem)
     date_ordered = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
 
