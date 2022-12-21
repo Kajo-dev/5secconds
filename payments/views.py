@@ -8,4 +8,6 @@ from product_store.models import Cart
 def transaction_confirmed(request):
     body = json.loads(request.body)
     
+    
+
     return JsonResponse('Payment completed!', safe=False)

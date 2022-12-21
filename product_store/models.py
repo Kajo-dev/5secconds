@@ -69,7 +69,6 @@ class Sizes(models.Model):
 class CartItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
-    date_ordered = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.product.title
@@ -77,9 +76,7 @@ class CartItem(models.Model):
 #całe zamowienie
 class Cart(models.Model):
     items = models.ManyToManyField(CartItem)
-    date_ordered = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
-
 
     def get_sum_cart(self):
         return sum(item.product.price for item in self.items.all())
@@ -90,3 +87,16 @@ class Cart(models.Model):
     def __str__(self):
         return '{0}'.format(self.owner)
 
+class Order(models.Model):
+    cart_owner = models.OneToOneField(Cart,on_delete=models.SET_NULL, null=True)
+    order_items = Cart.get_cart_items
+    date_ordered = models.DateTimeField(auto_now=True)
+    payment_status_choice = (
+        ('Complited', 'Complited'),
+        ('Pennding', 'Pennding'),
+        ('Canceled', 'Canceled'),
+    )
+    payment_status = models.CharField(choices=payment_status_choice, max_length=10,default='Canceled')
+
+    def __str__(self):
+        return '{0}'.format(self.cart_owner.owner)
