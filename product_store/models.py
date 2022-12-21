@@ -78,7 +78,8 @@ class OrderItem(models.Model):
 class Order(models.Model):
     items = models.ManyToManyField(OrderItem)
     date_ordered = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True )
+    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+
 
     def get_sum_cart(self):
         return sum(item.product.price for item in self.items.all())
