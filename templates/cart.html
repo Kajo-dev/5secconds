@@ -7,13 +7,17 @@
 <body>
     <h1>Koszyk</h1>
     <br>
-    {% for order in user_order %}
-        {% for items in order.get_cart_items %}
+    {% for cart_item in user_cart %}
+        {% for items in cart_item.get_cart_items %}
             <p>{{items}}: {{items.product.price}}zł  <a href="/delete_from_cart/{{items.id}}/">Usuń</a></p> 
         {% endfor %}
         <br>
-        <p>Wartość koszyka: {{order.get_sum_cart}} zł</p>
-        <script> var total = '{{order.get_sum_cart}}'</script>
+        <p>Wartość koszyka: {{cart_item.get_sum_cart}} zł</p>
+
+        <script>
+            var total = '{{cart_item.get_sum_cart}}'
+            var orderID = '{{cart_item.id}}'
+        </script>
     {% endfor %}
 
     <div id="paypal-button-container"></div>
@@ -21,8 +25,36 @@
     <script src="https://www.paypal.com/sdk/js?client-id=AfZF0w8UQdYWmbj4mUixcwfxyr0YOWQDFZt21RpD7Gk93qnTyLKxA86kzIXioNRcCSqRWCP9V5r9gXs0&currency=PLN"></script>
 
     <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function completeOrder(transaction_id,transaction_status){
+            var url = "{% url 'confirm_pay_page' %}"
+
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'orderID':orderID,'transaction_id':transaction_id,'transaction_status':transaction_status})
+            })
+        }
+
         paypal.Buttons({
-            // Set up the transaction
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
@@ -32,14 +64,11 @@
                     }]
                 });
             },
-
-            // Finalize the transaction
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-                    // Successful capture! For demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     var transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                    completeOrder(transaction.id,transaction.status)
+                    //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 });
             }
         }).render('#paypal-button-container');

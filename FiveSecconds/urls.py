@@ -6,10 +6,12 @@ from django.conf import settings
 from user_log_reg import views as user_log_reg_views
 from home import views as home_views
 from product_store import views as product_store_views
+from payments import views as payments_views
 
 urlpatterns = [
     path('admin', admin.site.urls),
     
+    path('payments_conf',payments_views.transaction_confirmed,name='confirm_pay_page'),
     path('register',user_log_reg_views.register_page, name='register_page'),
     path('login',user_log_reg_views.login_page, name='login_page'),
     path('logout',user_log_reg_views.logout_page, name='logout_page'),
@@ -23,6 +25,8 @@ urlpatterns = [
     path('<slug:slug>', product_store_views.product_detail, name='detail_page'),
     path('add_to_cart/<int:product_id>/', product_store_views.add_to_cart, name='add_to_cart'),
     path('delete_from_cart/<int:items_id>/', product_store_views.delete_from_cart, name='delete_from_cart'),
+
+    
     
 ]
 

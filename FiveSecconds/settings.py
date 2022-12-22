@@ -61,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     
 ]
  
@@ -91,7 +90,8 @@ WSGI_APPLICATION = 'FiveSecconds.wsgi.application'
 
 DATABASES = {
 'default': {
-        'ENGINE': 'django.db.backends.mysql',
+
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('database_NAME'), 
         'USER': os.getenv('database_USER'),
         'PASSWORD': os.getenv('database_PASSWORD'),
