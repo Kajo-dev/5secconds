@@ -2,3 +2,5 @@
 __pycache__
 fivesec.sqlite3
 .vscode
+dockerfile
+.dockerignore.

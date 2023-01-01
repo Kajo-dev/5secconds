@@ -65,7 +65,7 @@ class Sizes(models.Model):
         return self.id_product.title +" "+ self.name_size
 
 
-#jeden element zamówienia
+#jeden element koszyka
 class CartItem(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
@@ -73,7 +73,7 @@ class CartItem(models.Model):
     def __str__(self):
         return self.product.title
 
-#całe zamowienie
+#cały koszyk
 class Cart(models.Model):
     items = models.ManyToManyField(CartItem)
     owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)

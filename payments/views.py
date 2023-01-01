@@ -7,7 +7,7 @@ from product_store.models import Cart
 @login_required(login_url='login_page')
 def transaction_confirmed(request):
     body = json.loads(request.body)
-    
+    print(body)
     
 
     return JsonResponse('Payment completed!', safe=False)
